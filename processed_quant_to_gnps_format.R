@@ -5,10 +5,10 @@ library(dplyr)
 #     As produced by mzmine
 # (2) Metadata (.csv)
 #     1st col: file names
-setwd("C:/Users/Olivia.Schwartz/OneDrive - University of Denver/Projects/Proteus Proteobactin/mzMINE/pos")
+setwd("C:/Users/Olivia.Schwartz/OneDrive - University of Denver/Projects/Alzheimers NAU/20250527_HILIC_BATCH3/20250527_HILIC_BATCH3_FC")
 
-with_blanks <- read.csv("C:/Users/Olivia.Schwartz/OneDrive - University of Denver/DU/Aron Lab/Experiments/20241213_NAU_GABA/20241217_mzmine/20241217_nau_gaba_iimn_gnps_quant.csv")
-quant_table <- read.csv("Normalised_Quant_table_pos.csv", sep = ",") #normalized table
+with_blanks <-  read.csv("mzmine/HILIC_FC_batchcorrect_16O_quant.csv", sep = ",")
+quant_table <- read.csv("processed_batchcorrected/Normalised_Quant_table.csv")
 
 colnames(with_blanks)[1] <- "row ID"
 colnames(with_blanks)[2] <- "row m/z"
