@@ -6,10 +6,10 @@ library(tidyverse)
 #     1st col: file names
 setwd("C:/Users/Olivia.Schwartz/OneDrive - University of Denver/Projects/Alzheimers NAU/20250527_HILIC_BATCH3/20250527_HILIC_BATCH3_FC")
 
-metadata <- read.csv("20250527_HILIC_BATCH3_FC_16O_md.csv")
-quant_table <- read.csv("mzmine/20250530_HILIC_BATCH3_FC_batchcorrect_quant.csv", sep = ",")
+metadata <- read.csv("20250527_HILIC_BATCH3_FC_16O_md_GNPS.csv")
+quant_table <- read.csv("HILIC_FC_batchc16_blanksub_imp_normtostd/HILIC_FC_batchc16_blanksub_imp_normtostd.csv", sep = ",")
 #canopus <- read.csv("canopus_formula_summary.csv")
-outfile <- "HILIC_FC_batchcorrect_16O_quant.csv"
+outfile <- "HILIC_FC_batchc16_blanksub_imp_normtostd_16O_GNPS.csv"
 
 
 

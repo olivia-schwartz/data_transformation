@@ -9,19 +9,19 @@ library(dplyr)
 #     1st col: file names
 
 
-setwd("C:/Users/Olivia.Schwartz/Downloads/HILIC_Brain")
+setwd("C:/Users/Olivia.Schwartz/OneDrive - University of Denver/Projects/Alzheimers NAU/Fecal_RP_202412")
 
-quant <-  read.csv("20250327_iimn_gnps_quant_processed_formatted.csv", sep = ",")
-metadata <- read.csv("20250327_md.csv")
+quant <-  read.csv("mzmine/mzmine_09062024_iimn_gnps_quant.csv", sep = ",")
+metadata <- read.csv("Fec_RP_md_rem.csv")
 
-output_name_quant <- "20250327_quant_FC_16O.csv"
-output_name_metadata <-"20250327_md_FC_16O.csv"
+output_name_quant <- "quantnosample.csv"
+output_name_metadata <-"mdnosample.csv"
 
 #Filter metadata
 colnames(metadata)<-gsub("ATTRIBUTE_","",colnames(metadata)) #Remove "ATTRIBUTE_"
 colnames(metadata)[1] <- "filename"
 metadata <- metadata %>%
-  dplyr::filter(metadata$Sample_Type == "Frontal Cortex" & metadata$Isotope == "16O")
+  dplyr::filter(metadata$Sample_Type != "Fecal")
 
 #Filter quant table
 colnames(quant)<-gsub(".Peak.area","",colnames(quant)) #Remove ".Peak.area."  

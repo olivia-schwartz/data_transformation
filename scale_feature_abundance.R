@@ -2,7 +2,7 @@
 
 library(tidyverse)
 
-setwd("C:/Users/Olivia.Schwartz/OneDrive - University of Denver/Projects/Alzheimers NAU/20250527_HILIC_BATCH3/20250527_HILIC_BATCH3_FC")
+setwd(paste(directory))
 
 # File Inputs
 # (1) Quant table (.csv)
@@ -10,14 +10,15 @@ setwd("C:/Users/Olivia.Schwartz/OneDrive - University of Denver/Projects/Alzheim
 # (2) Metadata (.csv)
 #     1st col: file names
 
-quant_table <- read.csv("mzmine/20250530_HILIC_BATCH3_FC_batchcorrect_quant.csv", sep = ",") #mzmine output
-metadata <- read.csv("20250527_HILIC_BATCH3_FC_md.csv", header = T, check.names = F, sep = ",")
+directory <- "C:/Users/Olivia.Schwartz/OneDrive - University of Denver/Projects/Alzheimers NAU/202504_HILIC_IntStd_Runs/Fecal/"
+quant_table <- read.csv(paste(directory,"mzmine/fecal_manual_quant.csv",sep=""), sep = ",") #mzmine output
+metadata <- read.csv(paste(directory,"2025_HILIC_Fec_md.csv",sep=""), header = T, check.names = F, sep = ",")
 
 attribute_1 <- "Sample_Type"
-condition_1 <- "Frontal Cortex"
-scale_ft <- "FT7817"
-scale_factor <- 6/5
-output_file <- "fc_scale.csv"
+condition_1 <- "GABA_Std"
+scale_ft <- "FT16840"
+scale_factor <- 1
+output_file <- "gaba_intstd_scale.csv"
 
 #Merge Data
 #Metadata
@@ -66,18 +67,20 @@ colnames(scaled_quant) <- paste0(colnames(scaled_quant), " Peak area")
 rownames(scaled_quant) <- sub("^FT", "", rownames(scaled_quant))
 
 #Export
-write.csv(file = paste0(output_file), scaled_quant)
+write.csv(file = paste0(directory,output_file,sep=""), scaled_quant)
 
 #Recombine
 # 
 # 
-# blank <- read.csv("blank_scale.csv")
+blank <- read.csv("blank_intstd_scale.csv")
 # QC <- read.csv("qc_scale.csv")
-# GABA_Std <- read.csv("gaba_scale.csv")
-# sample <- read.csv("fecal_scale.csv")
+GABA_Std <- read.csv("gaba_intstd_scale.csv")
+sample <- read.csv("Fec_intstd_scale.csv")
+# pooled <- read.csv("pooled_scale.csv")
 # 
-# merged_df <- merge(blank, QC, by = "X")
+merged_df <- merge(blank, GABA_Std, by = "X")
 # merged_df <- merge(merged_df, GABA_Std, by = "X")
-# merged_df <- merge(merged_df, sample, by = "X")
+merged_df <- merge(merged_df, sample, by = "X")
+# merged_df <- merge(merged_df, pooled, by ="X")
 # 
-# write.csv(merged_df, file = "scaled_std16840.csv")
+write.csv(merged_df, file = "scaled_std16840.csv")
